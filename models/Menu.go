@@ -14,7 +14,7 @@ type Menu struct {
 	Quantity     int      `bson:"quantity" json:"quantity"`
 }
 
-func NewMenu(menu Menu) *Menu {
+func NewMenu(menu Menu, images []string) *Menu {
 
 	return &Menu{
 		ID:           menu.ID,
@@ -22,7 +22,7 @@ func NewMenu(menu Menu) *Menu {
 		Description:  menu.Description,
 		Price:        menu.Price,
 		Category:     menu.Category,
-		Image:        menu.Image,
+		Image:        images,
 		Ingredients:  menu.Ingredients,
 		Instructions: menu.Instructions,
 		Quantity:     menu.Quantity,

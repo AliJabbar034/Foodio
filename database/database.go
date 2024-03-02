@@ -22,5 +22,7 @@ func ConnectDB() *mongo.Database {
 
 	coll := client.Database("Food")
 
+	fmt.Println("connection successfull........", coll)
+
 	return coll
 }

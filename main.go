@@ -26,12 +26,10 @@ func main() {
 		Addr:    fmt.Sprintf(":%s", port),
 		Handler: srv.routes(db),
 	}
-
+	fmt.Println("Starting server.....", port)
 	if err := serv.ListenAndServe(); err != nil {
 		fmt.Println("Error", err.Error())
 		panic(err)
 	}
-
-	fmt.Println("Starting server.....")
 
 }

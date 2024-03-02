@@ -2,6 +2,7 @@ package handler
 
 import (
 	"errors"
+	"log"
 	"net/http"
 
 	"github.com/alijabbbar034/foodApp/api/storer"
@@ -33,6 +34,7 @@ func (u *User_Handler) Register_User_Handler(c *gin.Context) {
 		utils.ErrorHandler(c, http.StatusBadRequest, errors.New("Bad request"))
 		return
 	}
+	log.Println("user data", user)
 
 	if err := models.ValidateUserData(user); err != nil {
 
@@ -53,7 +55,11 @@ func (u *User_Handler) Register_User_Handler(c *gin.Context) {
 	}
 
 	utils.SendToken(c, *saved)
-	return
+	// c.JSON(http.StatusCreated, gin.H{
+	// 	"message": "User Created",
+	// 	"user":    saved,
+	// })
+	// return
 }
 
 func (u *User_Handler) Login_User_Handler(c *gin.Context) {

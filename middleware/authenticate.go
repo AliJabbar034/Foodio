@@ -3,6 +3,7 @@ package middleware
 import (
 	"errors"
 	"fmt"
+	"log"
 	"net/http"
 	"os"
 
@@ -24,7 +25,9 @@ func (a *Auth_Handsler) Authenticat(c *gin.Context) {
 	fmt.Println("MIDDLEWARE Call Authentication")
 	secretKey := os.Getenv("SECRET_KEY")
 	tokenStr, err := c.Cookie("token")
+	log.Println("token", tokenStr)
 	if err != nil {
+		log.Println("token", err.Error())
 		utils.ErrorHandler(c, http.StatusUnauthorized, errors.New("Unauthorize access"))
 
 		c.AbortWithStatus(http.StatusUnauthorized)
@@ -37,6 +40,7 @@ func (a *Auth_Handsler) Authenticat(c *gin.Context) {
 	})
 
 	if err != nil {
+		log.Println("error parsing token", err.Error())
 		utils.ErrorHandler(c, http.StatusUnauthorized, errors.New("Unauthorized access"))
 		c.Abort()
 		return
@@ -44,19 +48,25 @@ func (a *Auth_Handsler) Authenticat(c *gin.Context) {
 
 	claims, ok := token.Claims.(jwt.MapClaims)
 	if !ok {
+		log.Println("claims is not a map")
 		utils.ErrorHandler(c, http.StatusUnauthorized, errors.New("Unauthorized access"))
 		c.Abort()
 		return
 	}
 	id := claims["id"].(string)
+	log.Println("id", id)
 	if id == "" {
+		log.Println("id is empty")
+
 		utils.ErrorHandler(c, http.StatusUnauthorized, errors.New("Unauthorized access"))
 		c.Abort()
+
 		return
 	}
 
 	user, err := a.auth.GetUserById(id)
 	if err != nil {
+		log.Println("Error getting user")
 		utils.ErrorHandler(c, http.StatusUnauthorized, errors.New("Unauthorized access"))
 		c.Abort()
 		return

@@ -2,6 +2,8 @@ package storer
 
 import (
 	"context"
+	"fmt"
+	"log"
 
 	"github.com/alijabbbar034/foodApp/models"
 	"go.mongodb.org/mongo-driver/bson"
@@ -31,7 +33,16 @@ func NewUserMongo(db *mongo.Database) *user_Mongo {
 
 func (m *user_Mongo) RegisterUser(user models.User) (*models.User, error) {
 
-	return nil, nil
+	log.Println("requesting user+v", user)
+	result, err := m.db.InsertOne(context.Background(), &user)
+	if err != nil {
+		fmt.Println(err.Error())
+		return nil, err
+	}
+
+	id := result.InsertedID.(primitive.ObjectID)
+	user.ID = id
+	return &user, nil
 }
 
 func (m *user_Mongo) GetByEmail(email string) (*models.User, error) {
@@ -73,8 +84,8 @@ func (m *user_Mongo) UpdateUser(user models.User, id primitive.ObjectID) (int64,
 	filter := bson.M{"_id": id}
 
 	updated := bson.D{{}}
-	if user.Name != "" {
-		updated = append(updated, bson.E{"$set", bson.D{{"name", user.Name}}})
+	if user.FirstName != "" {
+		updated = append(updated, bson.E{"$set", bson.D{{"name", user.FirstName}}})
 	}
 	if user.Email != "" {
 		updated = append(updated, bson.E{"$set", bson.D{{"email", user.Email}}})

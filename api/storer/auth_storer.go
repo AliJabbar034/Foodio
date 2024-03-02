@@ -4,8 +4,8 @@ import (
 	"context"
 
 	"github.com/alijabbbar034/foodApp/models"
-	"github.com/alijabbbar034/foodApp/utils"
 	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
@@ -18,13 +18,13 @@ type Auth_Mongo struct {
 
 func NewAuth_Mongor(db *mongo.Database) *Auth_Mongo {
 	return &Auth_Mongo{
-		db: db.Collection("user"),
+		db: db.Collection("users"),
 	}
 }
 
 func (a *Auth_Mongo) GetUserById(id string) (*models.User, error) {
 
-	_id, err := utils.IdChange(id)
+	_id, err := primitive.ObjectIDFromHex(id)
 	if err != nil {
 		return nil, err
 	}
