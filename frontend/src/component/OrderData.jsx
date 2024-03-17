@@ -157,7 +157,10 @@ Dessert
 </div>
 
 </div>
-  { menuData?.length >0  ?
+  <div>
+  { 
+  menuData?.length >0  ?
+
     <div className=' w-[95%] m-auto  grid-cols-1  h-1/3 grid md:grid-cols-3  gap-5  items-center justify-center space-x-3 space-y-3'>
 
         
@@ -203,15 +206,25 @@ Dessert
 
  }
 
-{   menuData?.length > 0  && <div className='m-auto flex flex-col items-center justify-center w-full py-7'>
-         <Link className=' bg-red-700 text-white py-2 px-3 rounded-lg '>Load More..</Link>
-         </div>}
 
-    </div>
+</div>
+
+
+
+
+   
     :
 <div className=' flex items-center justify-center w-full'>
     <h2 className=' text-center'>No data found</h2>
-    </div>}
+    </div>
+    }
+  </div>
+
+{ menuData?.length > 0  && 
+<div className='m-auto flex  w-[100%] items-center justify-center  flex-col py-7 '>
+         <Link className=' bg-red-700 text-white py-2 px-3 rounded-lg  hover:bg-red-400 hover:text-white hover:transition-all hover:duration-150'>Load More..</Link>
+         </div>}
+
 
 
 

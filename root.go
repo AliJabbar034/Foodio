@@ -26,7 +26,7 @@ func (app *Config) routes(db *mongo.Database) http.Handler {
 
 	mux.Use(cors.New(
 		cors.Config{
-			AllowOrigins:     []string{"http://localhost:5173"},
+			AllowOrigins:     []string{"*"},
 			AllowMethods:     []string{"GET", "POST", "PUT", "DELETE", "PATCH"},
 			AllowHeaders:     []string{"Content-Type", "Authorization"},
 			ExposeHeaders:    []string{"Content-Length", "Access-Control-Allow-Origin"},

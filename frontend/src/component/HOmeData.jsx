@@ -159,7 +159,7 @@ Dessert
         <div    onClick={(e)=>{
              e.preventDefault();
             
-             navigate('/detail', { state: { item: item } });
+             navigate('/order-online', { state: { item: item } });
         }}
        
         className=' bg-red-500 text-white px-4 py-2 rounded font-bold cursor-pointer'>Order Now</div>

@@ -38,11 +38,11 @@ function HomePage() {
 
  <div className='space-x-4 flex mt-3'>
 
-    <Link className='bg-red-600 py-1 px-3 rounded text-white  font-bold md:py-3 md:px-5 hover:bg-red-400 translate-x-2 transform duration-75'>
+    <Link  to={'/order-online'} className='bg-red-600 py-1 px-3 rounded text-white  font-bold md:py-3 md:px-5 hover:bg-red-400 translate-x-2 transform duration-75'>
     Order Now
     </Link>
 
-    <Link className='bg-red-400 py-1 px-3 rounded text-white  transform duration-75 font-bold md:py-3 md:px-5'>
+    <Link  to={'/reservation'} className='bg-red-400 py-1 px-3 rounded text-white  transform duration-75 font-bold md:py-3 md:px-5'>
     Reservation
     </Link>
  </div>
@@ -85,7 +85,7 @@ This dish is full of flavor and nutrition! Quinoa is a complete protein, providi
 </p>
 
 <div className='flex w-full items-center justify-center md:items-start md:justify-start'>
-<Link className='bg-red-600 py-4 px-3 w-32 text-center rounded text-white  font-bold hover:bg-red-400  transform duration-75'>
+<Link to={'/order-online'} className='bg-red-600 py-4 px-3 w-32 text-center rounded text-white  font-bold hover:bg-red-400  transform duration-75'>
 Order Now 
 
 </Link>
